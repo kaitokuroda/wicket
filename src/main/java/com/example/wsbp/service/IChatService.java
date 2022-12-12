@@ -15,4 +15,6 @@ public interface IChatService {
      * @return Chat型のListインスタンス
      */
     public List<Chat> findChatUsers();
+
+    public boolean existsChat(String userName);
 }

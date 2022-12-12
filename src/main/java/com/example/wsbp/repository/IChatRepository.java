@@ -22,4 +22,6 @@ public interface IChatRepository {
      * @return レコードの内容を {@link Chat} の {@link List} で返す
      */
     public List<Chat> findChat();
+
+    public boolean exists(String userName);
 }
