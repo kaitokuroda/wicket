@@ -1,7 +1,8 @@
 package com.example.wsbp.repository;
 
 import com.example.wsbp.data.Chat;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public interface IChatRepository {
@@ -13,7 +14,7 @@ public interface IChatRepository {
      * @param chat 内容
      * @return データベースの更新行数
      */
-    public int insertChat(String userName, String chat);
+    public int insertChat(String userName, String chat,LocalDateTime time);
 
 
     /**

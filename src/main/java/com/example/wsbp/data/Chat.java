@@ -2,6 +2,8 @@ package com.example.wsbp.data;
 
 import java.io.Serializable;
 
+import java.time.LocalDateTime;
+
 // AUTH_USER テーブルのデータを入れるクラス
 // Wicketの Model に使うかもしれないクラスは、 implements Serializable をつける
 public class Chat implements Serializable {
@@ -9,9 +11,11 @@ public class Chat implements Serializable {
     private final String userName;  // auth_userテーブルのuser_name列のデータ
     private final String msgBody;  // chatテーブルのuser_chat列のデータ
 
-    public Chat(String userName, String msgBody) {
+    private final LocalDateTime time;
+    public Chat(String userName, String msgBody,LocalDateTime time) {
         this.userName = userName;
         this.msgBody = msgBody;
+        this.time=time;
     }
 
     public String getUserName() {
@@ -20,6 +24,10 @@ public class Chat implements Serializable {
 
     public String getUserPass() {
         return msgBody;
+    }
+
+    public LocalDateTime getUserTime() {
+        return time;
     }
 
     @Override

@@ -18,6 +18,8 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.example.wsbp.service.IUserService;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @MountPath("UserChat")
 public class UserChatPage extends WebPage {
@@ -37,13 +39,15 @@ public class UserChatPage extends WebPage {
             protected void onSubmit() {
                 var userName = MySession.get().getUserName();
                 var chat = userChatModel.getObject();
+                var time=LocalDateTime.now();
                 var msg = "送信データ："
                         + userName
                         + ","
-                        + chat;
+                        + chat
+                        +time;
                 System.out.println(msg);
                 // IoC/DI した userService のメソッドを呼び出す
-                chatService.registerChat(userName, chat);
+                chatService.registerChat(userName, chat,time);
                 //移動したいページをnewの後に入れ、引数に渡したいものを入れる
                 setResponsePage(new UserChatCompPage());
             }
@@ -72,6 +76,10 @@ public class UserChatPage extends WebPage {
                 var userChatModel = Model.of(authUser.getUserPass());
                 var userChatLabel = new Label("chat", userChatModel);
                 listItem.add(userChatLabel);
+
+                var userTimeModel = Model.of(authUser.getUserTime());
+                var userTimeLabel = new Label("time",userTimeModel);
+                listItem.add(userTimeLabel);
             }
         };
         add(usersChatLV);
