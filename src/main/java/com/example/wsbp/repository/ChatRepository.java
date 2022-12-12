@@ -7,7 +7,8 @@ import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.stereotype.Repository;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Repository
@@ -24,9 +25,9 @@ public class ChatRepository implements IChatRepository {
 
 
     @Override
-    public int insertChat(String userName, String chats) {
-        var sql = "insert into chat values (?, ?)";
-        var n = jdbc.update(sql, userName, chats);
+    public int insertChat(String userName, String chats,LocalDateTime time) {
+        var sql = "insert into chat values (?, ?, ?)";
+        var n = jdbc.update(sql, userName, chats,time);
         return n;
     }
 

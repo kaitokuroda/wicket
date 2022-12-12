@@ -6,7 +6,8 @@ import com.example.wsbp.repository.IAuthUserRepository;
 import com.example.wsbp.repository.IChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -23,8 +24,9 @@ public class ChatService implements IChatService {
 
 
     @Override
-    public void registerChat(String userName, String chat) {
-        int n = chatRepos.insertChat(userName, chat);
+    public void registerChat(String userName, String chat,LocalDateTime time) {
+
+        int n = chatRepos.insertChat(userName, chat,time);
         System.out.println("記録行数：" + n);
     }
 
