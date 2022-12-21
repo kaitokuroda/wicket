@@ -85,5 +85,25 @@ public class UserChatPage extends WebPage {
         add(usersChatLV);
 
 
+        var userNameModel = Model.of("");
+        Form<Void> usersChatForm = new Form<Void>("chatSearch") {
+
+            protected void onChatSubmit() {
+                var userName = userNameModel.getObject();
+                if (chatService.existsChat(userName)) {
+                    System.out.println("a");
+                }
+                setResponsePage(new UserChatPage());
+            }
+        };
+        var userNameField = new TextField<>("nameSearch", userNameModel) {
+            @Override
+            protected void onInitialize() {
+                super.onInitialize();
+                // 文字列の長さを8〜32文字に制限するバリデータ
+                add(StringValidator.lengthBetween(8, 32));
+            }
+        };
+
     }
 }

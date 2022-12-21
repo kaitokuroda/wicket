@@ -37,4 +37,11 @@ public class ChatService implements IChatService {
         return chats;
     }
 
+    @Override
+    public boolean existsChat(String userName) {
+        var result = chatRepos.exists(userName);
+        System.out.println(userName + ", "  + " のユーザ照合結果：" + result);
+        return result;
+    }
+
 }

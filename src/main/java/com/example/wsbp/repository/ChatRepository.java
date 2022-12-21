@@ -46,4 +46,22 @@ public class ChatRepository implements IChatRepository {
         // 取り出したデータ（Listの要素）をそのまま返値とする。
         return users;
     }
+
+    @Override
+    public boolean exists(String userName) {
+        // ユーザ名とパスワードが一致する情報が auth_user テーブルにあれば、true を返す
+        // テーブルになければ、何も返さない
+        var sql = "select true from chat "
+                + "where user_name = ? ";
+
+        // 検索用のSQLを実行する方法。検索結果をList（可変長配列）で返す。
+        // データの追加時と若干異なるので注意。
+        var booles = jdbc.query(sql,
+                SingleColumnRowMapper.newInstance(Boolean.class),
+                userName);
+
+// Listにデータがある(＝trueの要素ものがある)：照合成功
+// Listにデータがない(要素が何もない)：照合失敗
+        return !booles.isEmpty();
+    }
 }
